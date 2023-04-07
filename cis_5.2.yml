@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root 
   vars:
     rhel9_cis_sshd_config_file: /etc/ssh/sshd_config
@@ -28,9 +28,7 @@
           path: "/etc/ssh/sshd_config"
           owner: root
           group: root
-          mode: 0600
-      when:
-          - rhel9cis_rule_5_2_1
+          mode: 0600      
       tags:
           - level1-server
           - level1-workstation
@@ -58,8 +56,6 @@
             loop: "{{ rhel9cis_5_2_2_ssh_private_host_key.files }}"
             loop_control:
                 label: "{{ item.path }}"
-      when:
-          - rhel9cis_rule_5_2_2
       tags:
           - level1-server
           - level1-workstation
@@ -87,8 +83,6 @@
             loop: "{{ rhel9cis_5_2_3_ssh_public_host_key.files }}"
             loop_control:
                 label: "{{ item.path }}"
-      when:
-          - rhel9cis_rule_5_2_3
       tags:
           - level1-server
           - level1-workstation
@@ -133,8 +127,6 @@
                 validate: sshd -t -f %s
             notify: Restart sshd
             when: "rhel9cis_sshd['denygroups']|default('') | length > 0"
-      when:
-          - rhel9cis_rule_5_2_4
       tags:
           - level1-server
           - level1-workstation
@@ -148,8 +140,6 @@
           regexp: "^#LogLevel|^LogLevel"
           line: 'LogLevel {{ rhel9cis_ssh_loglevel }}'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_5
       tags:
           - level1-server
           - level1-workstation
@@ -163,8 +153,6 @@
           regexp: "^#UsePAM|^UsePAM"
           line: 'UsePAM yes'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_6
       tags:
           - level1-server
           - level1-workstation
@@ -178,8 +166,6 @@
           regexp: "^#PermitRootLogin|^PermitRootLogin"
           line: 'PermitRootLogin no'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_7
       tags:
           - level1-server
           - level1-workstation
@@ -193,8 +179,6 @@
           regexp: "^#HostbasedAuthentication|^HostbasedAuthentication"
           line: 'HostbasedAuthentication no'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_8
       tags:
           - level1-server
           - level1-workstation
@@ -208,8 +192,6 @@
           regexp: "^#PermitEmptyPasswords|^PermitEmptyPasswords"
           line: 'PermitEmptyPasswords no'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_9
       tags:
           - level1-server
           - level1-workstation
@@ -223,8 +205,6 @@
           regexp: "^#PermitUserEnvironment|^PermitUserEnvironment"
           line: 'PermitUserEnvironment no'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_10
       tags:
           - level1-server
           - level1-workstation
@@ -238,8 +218,6 @@
           regexp: "^#IgnoreRhosts|^IgnoreRhosts"
           line: 'IgnoreRhosts yes'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_11
       tags:
           - level1-server
           - level1-workstation
@@ -253,8 +231,6 @@
           regexp: "^#X11Forwarding|^X11Forwarding"
           line: 'X11Forwarding no'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_12
       tags:
           - level2-server
           - level1-workstation
@@ -268,8 +244,6 @@
           regexp: "^#AllowTcpForwarding|^AllowTcpForwarding"
           line: 'AllowTcpForwarding no'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_13
       tags:
           - level2-server
           - level2-workstation
@@ -289,8 +263,6 @@
             ansible.builtin.shell: sed -ri "s/^\s*(CRYPTO_POLICY\s*=.*)$/# \1/" /etc/sysconfig/sshd
             notify: Restart sshd
             when: ssh_crypto_discovery.stdout | length > 0
-      when:
-          - rhel9cis_rule_5_2_14
       tags:
           - level1-server
           - level1-workstation
@@ -303,8 +275,6 @@
           path: "{{ rhel9_cis_sshd_config_file }}"
           regexp: '^Banner'
           line: 'Banner /etc/issue.net'
-      when:
-          - rhel9cis_rule_5_2_15
       tags:
           - level1-server
           - level1-workstation
@@ -318,8 +288,6 @@
           regexp: '^(#)?MaxAuthTries \d'
           line: 'MaxAuthTries 4'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_16
       tags:
           - level1-server
           - level1-workstation
@@ -333,8 +301,6 @@
           regexp: "^#MaxStartups|^MaxStartups"
           line: 'MaxStartups 10:30:60'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_17
       tags:
           - level1-server
           - level1-workstation
@@ -348,8 +314,6 @@
           regexp: "^#MaxSessions|^MaxSessions"
           line: 'MaxSessions {{ rhel9cis_ssh_maxsessions }}'
           validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_18
       tags:
           - level1-server
           - level1-workstation
@@ -362,9 +326,7 @@
           path: "{{ rhel9_cis_sshd_config_file }}"
           regexp: "^#LoginGraceTime|^LoginGraceTime"
           line: "LoginGraceTime {{ rhel9cis_sshd['logingracetime'] }}"
-          validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_19
+          validate: sshd -t -f %s 
       tags:
           - level1-server
           - level1-workstation
@@ -387,8 +349,6 @@
                 regexp: '^ClientAliveCountMax'
                 line: "ClientAliveCountMax {{ rhel9cis_sshd['clientalivecountmax'] }}"
                 validate: sshd -t -f %s
-      when:
-          - rhel9cis_rule_5_2_20
       tags:
           - level1-server
           - level1-workstation
