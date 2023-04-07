@@ -1,5 +1,5 @@
 ---
-hosts: all
+hosts: localhost
 vars:
     rhel9_cis_sshd_config_file: /etc/ssh/sshd_config
 
