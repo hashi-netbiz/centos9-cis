@@ -5,9 +5,9 @@
     rhel9_cis_sshd_config_file: /etc/ssh/sshd_config
 
     rhel9cis_sshd:
-      - clientalivecountmax: 3
-      - clientaliveinterval: 15
-      - logingracetime: 60
+      clientalivecountmax: 3
+      clientaliveinterval: 15
+      logingracetime: 60
       # WARNING: make sure you understand the precedence when working with these values!!
       # allowusers:
       # allowgroups: systems dba
@@ -29,13 +29,6 @@
           owner: root
           group: root
           mode: 0600      
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - permissions
-          - rule_5.2.1
 
     - name: "5.2.2 | PATCH | Ensure permissions on SSH private host key files are configured"
       block:
@@ -56,13 +49,6 @@
             loop: "{{ rhel9cis_5_2_2_ssh_private_host_key.files }}"
             loop_control:
                 label: "{{ item.path }}"
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - permissions
-          - rule_5.2.2
 
     - name: "5.2.3 | PATCH | Ensure permissions on SSH public host key files are configured"
       block:
@@ -83,12 +69,6 @@
             loop: "{{ rhel9cis_5_2_3_ssh_public_host_key.files }}"
             loop_control:
                 label: "{{ item.path }}"
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.3
 
     - name: "5.2.4 | PATCH | Ensure SSH access is limited"
       block:
@@ -127,12 +107,6 @@
                 validate: sshd -t -f %s
             notify: Restart sshd
             when: "rhel9cis_sshd['denygroups']|default('') | length > 0"
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.4
 
     - name: "5.2.5 | PATCH | Ensure SSH LogLevel is appropriate"
       ansible.builtin.lineinfile:
@@ -140,12 +114,6 @@
           regexp: "^#LogLevel|^LogLevel"
           line: 'LogLevel {{ rhel9cis_ssh_loglevel }}'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - sshs
-          - rule_5.2.5
 
     - name: "5.2.6 | PATCH | Ensure SSH PAM is enabled"
       ansible.builtin.lineinfile:
@@ -153,12 +121,6 @@
           regexp: "^#UsePAM|^UsePAM"
           line: 'UsePAM yes'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.6
 
     - name: "5.2.7 | PATCH | Ensure SSH root login is disabled"
       ansible.builtin.lineinfile:
@@ -166,12 +128,6 @@
           regexp: "^#PermitRootLogin|^PermitRootLogin"
           line: 'PermitRootLogin no'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.7
 
     - name: "5.2.8 | PATCH | Ensure SSH HostbasedAuthentication is disabled"
       ansible.builtin.lineinfile:
@@ -179,12 +135,6 @@
           regexp: "^#HostbasedAuthentication|^HostbasedAuthentication"
           line: 'HostbasedAuthentication no'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.8
 
     - name: "5.2.9 | PATCH | Ensure SSH PermitEmptyPasswords is disabled"
       ansible.builtin.lineinfile:
@@ -192,12 +142,6 @@
           regexp: "^#PermitEmptyPasswords|^PermitEmptyPasswords"
           line: 'PermitEmptyPasswords no'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.9
 
     - name: "5.2.10 | PATCH | Ensure SSH PermitUserEnvironment is disabled"
       ansible.builtin.lineinfile:
@@ -205,12 +149,6 @@
           regexp: "^#PermitUserEnvironment|^PermitUserEnvironment"
           line: 'PermitUserEnvironment no'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.10
 
     - name: "5.2.11 | PATCH | Ensure SSH IgnoreRhosts is enabled"
       ansible.builtin.lineinfile:
@@ -218,12 +156,6 @@
           regexp: "^#IgnoreRhosts|^IgnoreRhosts"
           line: 'IgnoreRhosts yes'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.11
 
     - name: "5.2.12 | PATCH | Ensure SSH X11 forwarding is disabled"
       ansible.builtin.lineinfile:
@@ -231,12 +163,6 @@
           regexp: "^#X11Forwarding|^X11Forwarding"
           line: 'X11Forwarding no'
           validate: sshd -t -f %s
-      tags:
-          - level2-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.12
 
     - name: "5.2.13 | PATCH | Ensure SSH AllowTcpForwarding is disabled"
       ansible.builtin.lineinfile:
@@ -244,12 +170,6 @@
           regexp: "^#AllowTcpForwarding|^AllowTcpForwarding"
           line: 'AllowTcpForwarding no'
           validate: sshd -t -f %s
-      tags:
-          - level2-server
-          - level2-workstation
-          - patch
-          - ssh
-          - rule_5.2.13
 
     - name: "5.2.14 | PATCH | Ensure system-wide crypto policy is not over-ridden"
       block:
@@ -263,24 +183,12 @@
             ansible.builtin.shell: sed -ri "s/^\s*(CRYPTO_POLICY\s*=.*)$/# \1/" /etc/sysconfig/sshd
             notify: Restart sshd
             when: ssh_crypto_discovery.stdout | length > 0
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.14
 
     - name: "5.2.15 | PATCH | Ensure SSH warning banner is configured"
       ansible.builtin.lineinfile:
           path: "{{ rhel9_cis_sshd_config_file }}"
           regexp: '^Banner'
           line: 'Banner /etc/issue.net'
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.15
 
     - name: "5.2.16 | PATCH | Ensure SSH MaxAuthTries is set to 4 or less"
       ansible.builtin.lineinfile:
@@ -288,12 +196,6 @@
           regexp: '^(#)?MaxAuthTries \d'
           line: 'MaxAuthTries 4'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.16
 
     - name: "5.2.17 | PATCH | Ensure SSH MaxStartups is configured"
       ansible.builtin.lineinfile:
@@ -301,12 +203,6 @@
           regexp: "^#MaxStartups|^MaxStartups"
           line: 'MaxStartups 10:30:60'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.17
 
     - name: "5.2.18 | PATCH | Ensure SSH MaxSessions is set to 10 or less"
       ansible.builtin.lineinfile:
@@ -314,12 +210,6 @@
           regexp: "^#MaxSessions|^MaxSessions"
           line: 'MaxSessions {{ rhel9cis_ssh_maxsessions }}'
           validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.18
 
     - name: "5.2.19 | PATCH | Ensure SSH LoginGraceTime is set to one minute or less"
       ansible.builtin.lineinfile:
@@ -327,13 +217,7 @@
           regexp: "^#LoginGraceTime|^LoginGraceTime"
           line: "LoginGraceTime {{ rhel9cis_sshd['logingracetime'] }}"
           validate: sshd -t -f %s 
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.19
-
+ 
     - name: "5.2.20 | PATCH | Ensure SSH Idle Timeout Interval is configured"
       block:
           - name: "5.2.20 | PATCH | Ensure SSH Idle Timeout Interval is configured | Add line in sshd_config for ClientAliveInterval"
@@ -349,11 +233,6 @@
                 regexp: '^ClientAliveCountMax'
                 line: "ClientAliveCountMax {{ rhel9cis_sshd['clientalivecountmax'] }}"
                 validate: sshd -t -f %s
-      tags:
-          - level1-server
-          - level1-workstation
-          - patch
-          - ssh
-          - rule_5.2.20
+
 
         
