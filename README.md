@@ -23,11 +23,11 @@ Instructions
 8. Stop the VM in azure and proceed to section 2.0 below
 
 
-2.0 Finally create a golden image from the modified VM in 4.0 above
+2.0 Finally create a golden image from the modified VM in 1.0 above
 ############
 for the creation of the golden centos 9 stream image, refer to the 
 microsoft publication referenced below:
 
     https://learn.microsoft.com/en-us/azure/virtual-machines/capture-image-portal
 
-NB: The Golden image is to be based on the VM created in section 1.0 above.
+
