@@ -17,3 +17,19 @@
         /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
 
 ### [5] Check the report.
+
+### [6] generate remediation script from scaned result.
+        Remediation script will change various system settings, so you must take care if you run it, especially for production systems.
+       
+        ## make sure the [Result ID] in the result output on [4]
+        oscap info ssg-cs9-ds.xml | grep "Result ID" 
+        
+        ## generate remediation script
+        oscap xccdf generate fix \
+        --fix-type ansible \
+        --output ssg-cs9-ds-remediation-playbook.yml \
+        --result-id xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_ospp \   # replace with the "Result ID" above
+        ssg-cs9-ds.xml 
+        
+        # run remediation script
+         ./ssg-cs9-ds-remediation.sh 
