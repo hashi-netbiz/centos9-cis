@@ -16,7 +16,7 @@
         --fetch-remote-resources \
         /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
 
-### [5] Check the report.
+### [5] Check the html report and rename as ssg-cs9-ds-old.html.
 
 ### [6] generate remediation script from scaned result.
         Remediation script will change various system settings, so you must take care if you run it, especially for production systems.
@@ -32,4 +32,22 @@
         ssg-cs9-ds.xml 
         
         # run remediation script
-         ./ssg-cs9-ds-remediation.sh 
+        # install ansible 
+        dnf install ansible-core -y
+        
+        # update hosts file
+        cat << 'EOF' >> /etc/ansible/hosts
+        localhost ansible_connection=local
+        EOF
+
+        # execute ansible playbook to install CIS benchmarks and remediate
+        ansible-playbook './ssg-cs9-ds-remediation-playbook.yml'
+        
+ ### [7] Re-run the HTML report and check the result:
+        oscap xccdf eval \
+        --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
+        --results ssg-cs9-ds.xml \
+        --report ssg-cs9-ds.html \
+        --fetch-remote-resources \
+        /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
+       
