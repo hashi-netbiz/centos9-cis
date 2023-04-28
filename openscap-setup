@@ -7,7 +7,7 @@
 ### [3] display description for each content:
         oscap info /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
         
-### [4] Scan CentOS System with [oscap] command.
+### [4] Scan CentOS System with [oscap] command. This based on server level 1 security checks only
         Scan result is generated as HTML report, verify it and try to apply recommended settings as much as possible:
         oscap xccdf eval \
         --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
