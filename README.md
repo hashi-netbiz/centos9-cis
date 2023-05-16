@@ -36,20 +36,20 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
 ### [6] Generate remediation script from scaned result.
         Remediation script will change various system settings, so you must take care if you run it, especially for production systems.
        
-        ## make sure the [Result ID] in the result output on [4]
+### make sure the [Result ID] in the result output on [4]
         oscap info ssg-cs9-ds.xml | grep "Result ID" 
         
-        ## generate remediation script
+###     Generate remediation script
         oscap xccdf generate fix \
         --fix-type ansible \
         --output ssg-cs9-ds-remediation-playbook.yml \
         --result-id xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_server_l1 \   
         ssg-cs9-ds.xml 
         
-        ## copy the newly created ansible playbook file to the context user's home directory
+###     Copy the newly created ansible playbook file to the context user's home directory
         cp ssg-cs9-ds-remediation-playbook.yml /home/user/ssg-cs9-ds-remediation-playbook-existing.yml
         
-        ## change the file ownership. Replace {CONTEXT-USER} with actual centos local user
+###     Change the file ownership. Replace {CONTEXT-USER} with actual centos local user
         sudo chown {CONTEXT-USER} ssg-cs9-ds-remediation-playbook-existing.yml
         
 ###      Transfer the newly created playbook file from the VM to the local desktop environment to view:
