@@ -7,10 +7,10 @@ Section A below describes how openscap can be used to harden the centos 9 stream
 clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
 
 # SECTION A:
-# [1] Install the required packages:
+### [1] Install the required packages:
         dnf -y install openscap-scanner scap-security-guide
 
-# [2] SCAP Security Guide is installed under the [/usr/share/xml/scap/ssg/content] directory: 
+### [2] SCAP Security Guide is installed under the [/usr/share/xml/scap/ssg/content] directory: 
         ll /usr/share/xml/scap/ssg/content/ 
 
 # [3] display description for each content: This displays all the security profiles implemented by oscap.
