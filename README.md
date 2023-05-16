@@ -16,8 +16,8 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
 ### [3] display description for each content: This displays all the security profiles implemented by oscap.
         oscap info /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
         
-### [4] Scan CentOS System with [oscap] command. This based on server level 1 security checks only
-        Scan result is generated as HTML report, verify it and try to apply recommended settings as much as possible:
+### [4] Scan CentOS System with [oscap] command. This is based on server level 1 security checks only.
+###     Scan result is generated as HTML report, verify it and try to apply recommended settings as much as possible:
         oscap xccdf eval \
         --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
         --results ssg-cs9-ds.xml \
