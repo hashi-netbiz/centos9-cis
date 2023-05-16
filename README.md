@@ -33,7 +33,7 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
 ###      Run the copy command on your desktop
         scp user@ip or host:/home/user/ssg-cs9-ds-existing.html ./        
 
-### [6] Generate remediation script from scaned result.
+### [6] Generate remediation script from scanned result.
 ###     Remediation script will change various system settings, so you must take care if you run it, especially for production systems.
        
 ### make sure the [Result ID] in the result output on [4]
@@ -101,7 +101,7 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
 ### [9] CD to the root directory of the VM and it up but executing the following:
         rm -f ssg*
         
-###[10] Finally create a golden image from the modified VM. For the creation of the golden centos 9 stream image, refer to the microsoft publication referenced below:
+### [10] Finally create a golden image from the modified VM. For the creation of the golden centos 9 stream image, refer to the microsoft publication referenced below:
 
         https://learn.microsoft.com/en-us/azure/virtual-machines/capture-image-portal
 
