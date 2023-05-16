@@ -1,4 +1,4 @@
-### centos9-cis
+##### centos9-cis
 
 Description
 -----------
@@ -56,13 +56,11 @@ clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
 #      Run the copy command on your desktop 
         scp user@ip or host:/home/user/ssg-cs9-ds-remediation-playbook-existing.yml ./ 
         
-#      Open the downloaded ansible file in visual studio code and edit the file to comform to the recommendations on
-#      the openscap ticket (LINK TO TICKET).
+#      Open the downloaded ansible file in visual studio code and edit the file to comform to the recommendations on the openscap ticket (LINK TO TICKET).
 
 #      Rename the modified ansible file as ssg-cs9-ds-remediation-playbook-new.yml
 
-#      Upload playbook back to the VM. Run the following command on your desktop from the directory where the updated 
-#      playbook is located. Replace {CONTEXT-USER} with actual centos local user
+#      Upload playbook back to the VM. Run the following command on your desktop from the directory where the updated playbook is located. Replace {CONTEXT-USER} with actual centos local user
         scp ssg-cs9-ds-remediation-playbook-new.yml {CONTEXT-USER}@ip or host:/home/{CONTEXT-USER}
         
 #      CD into the VM root directory and EXECUTE the following command
@@ -83,7 +81,7 @@ clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
         #run playbook
         ansible-playbook ./ssg-cs9-ds-remediation-playbook-new.yml
         
- ### [7] Re-run the HTML report and check the result:
+ # [7] Re-run the HTML report and check the result:
         oscap xccdf eval \
         --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
         --results ssg-cs9-ds.xml \
@@ -91,20 +89,19 @@ clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
         --fetch-remote-resources \
         /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
      
-### [8]
-##      Review the latest html report generated in 7 above and rename it as ssg-cs9-ds-updated.html
-##      copy the html file to the context user home directory as below:
+# [8]
+#      Review the latest html report generated in 7 above and rename it as ssg-cs9-ds-updated.html
+#      Copy the html file to the context user home directory as below:
         cp ssg-cs9-ds-existing.html /home/user/ssg-cs9-ds-updated.html
         
-##      transfer the latest report from the VM to local environment to view and make comparison with the original report:
-##      Run the copy command on your desktop
+#      Transfer the latest report from the VM to local environment to view and make comparison with the original report:
+#     Run the copy command on your desktop
         scp user@ip or host:/home/user/ssg-cs9-ds-updated.html ./ 
         
-### [9] CD to the root directory of the VM and it up but executing the following:
+# [9] CD to the root directory of the VM and it up but executing the following:
         rm -f ssg*
         
-###[10] Finally create a golden image from the modified VM. For the creation of the 
-        golden centos 9 stream image, refer to the microsoft publication referenced below:
+#[10] Finally create a golden image from the modified VM. For the creation of the golden centos 9 stream image, refer to the microsoft publication referenced below:
 
         https://learn.microsoft.com/en-us/azure/virtual-machines/capture-image-portal
 
