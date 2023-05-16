@@ -3,7 +3,7 @@
 Description
 -----------
 This repo provides 2 options to harden a CentOS Stream 9 VM in accordance with CIS Benchmark (Server - Level 1).
-Section A below describes how openscap can be used to harden the centos 9 stream. Section B describes how a single 
+Section A below describes how openscap and ansible can be used to harden the centos 9 stream. Section B describes how a single 
 clause in the CIS benchmark (specifically Clause 5.2) can be implemented to harden the image.
 
 # SECTION A:
