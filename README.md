@@ -2,9 +2,9 @@
 
 Description
 -----------
-This repo provides some scripts to be able to apply some CIS BENCHMARK to a CentOS Stream 9 VM in Azure cloud.
+This repo provides 2 options to harden a CentOS Stream 9 VM in accordance with CIS Benchmark (Server - Level 1).
 Section A below describes how openscap can be used to harden the centos 9 stream. Section B describes how a single 
-clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
+clause in the CIS benchmark (specifically Clause 5.2) can be implemented to harden the image.
 
 # SECTION A:
 ### [1] Install the required packages:
