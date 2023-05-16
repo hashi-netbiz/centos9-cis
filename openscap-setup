@@ -53,27 +53,26 @@
 ##      Rename the modified ansible file as ssg-cs9-ds-remediation-playbook-new.yml
 
 ##      Upload playbook back to the VM. Run the following command on your desktop from the directory where the updated 
-#       playbook is located. Replace {CONTEXT-USER} with actual centos local user
+##      playbook is located. Replace {CONTEXT-USER} with actual centos local user
         scp ssg-cs9-ds-remediation-playbook-new.yml {CONTEXT-USER}@ip or host:/home/{CONTEXT-USER}
         
-##      CD into VM root directory and EXECUTE the following command
-##      cp /home/{CONTEXT-USER}/ssg-cs9-ds-remediation-playbook-new.yml ssg-cs9-ds-remediation-playbook-new.yml        
+##      CD into the VM root directory and EXECUTE the following command
+        cp /home/{CONTEXT-USER}/ssg-cs9-ds-remediation-playbook-new.yml ssg-cs9-ds-remediation-playbook-new.yml        
         
         # run remediation script
         # install ansible-core. Since sysctl module is not included, install this module via ansible-galaxy 
         dnf install ansible-core -y
         ansible-galaxy collection install ansible.posix
         
-        # update hosts file located at /etc/ansible/hosts and append the following line
-        
+        # update the default anible hosts file located at /etc/ansible/hosts and append the following line:
+        localhost ansible_connection=local        
 
-        # execute ansible playbook to install CIS benchmarks and remediate
-        
+        # execute ansible playbook to install CIS benchmarks and remediate        
         # replace 'sysctl:' with 'ansible.posix.sysctl:' in remediation playbook       
-        sed 's/sysctl:/ansible.posix.sysctl:/g'  ssg-cs9-ds-remediation-playbook.yml 
+        sed 's/sysctl:/ansible.posix.sysctl:/g'  ssg-cs9-ds-remediation-playbook-new.yml 
         
         #run playbook
-        ansible-playbook ./ssg-cs9-ds-remediation-playbook.yml
+        ansible-playbook ./ssg-cs9-ds-remediation-playbook-new.yml
         
  ### [7] Re-run the HTML report and check the result:
         oscap xccdf eval \
@@ -82,4 +81,12 @@
         --report ssg-cs9-ds.html \
         --fetch-remote-resources \
         /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
-       
+     
+### [8]
+##      Review the latest html report generated in 7 above and rename it as ssg-cs9-ds-updated.html
+##      copy the html file to the context user home directory as below:
+        cp ssg-cs9-ds-existing.html /home/user/ssg-cs9-ds-updated.html
+        
+##      transfer the latest report from the VM to local environment to view and make comparison with the original report:
+##      Run the copy command on your desktop
+        scp user@ip or host:/home/user/ssg-cs9-ds-updated.html ./ 
