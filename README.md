@@ -13,10 +13,10 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
 ### [2] SCAP Security Guide is installed under the [/usr/share/xml/scap/ssg/content] directory: 
         ll /usr/share/xml/scap/ssg/content/ 
 
-### [3] display description for each content: This displays all the security profiles implemented by oscap.
+### [3] Display description for each content. Openscap Implemented security profiles are listed.
         oscap info /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
         
-### [4] Scan CentOS System with [oscap] command. This is based on server level 1 security checks only.
+### [4] Scan CentOS System with [oscap] command. This is based on CIS server level 1 security checks only.
 ###     Scan result is generated as HTML report, verify it and try to apply recommended settings as much as possible:
         oscap xccdf eval \
         --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
@@ -26,7 +26,7 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
         /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
 
 ### [5] Check the html report and rename as ssg-cs9-ds-existing.html
-###     Copy the html file to the context user home directory as below:
+###        Copy the html file to the context user home directory as below:
         cp ssg-cs9-ds-existing.html /home/user/ssg-cs9-ds-existing.html
         
 ###      Transfer the newly created report from the VM to local environment to view:
