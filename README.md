@@ -1,4 +1,4 @@
-##### centos9-cis
+## centos9-cis
 
 Description
 -----------
