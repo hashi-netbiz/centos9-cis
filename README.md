@@ -105,10 +105,10 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
 
         https://learn.microsoft.com/en-us/azure/virtual-machines/capture-image-portal
 
-
-
-
-
+######
+######
+######
+######
 
 ### SECTION B
 
