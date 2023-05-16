@@ -71,7 +71,7 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
         dnf install ansible-core -y
         ansible-galaxy collection install ansible.posix
         
-####     Update the default anible hosts file located at /etc/ansible/hosts and append the following line:
+####     Update the default ansible hosts file located at /etc/ansible/hosts and append the following line:
         localhost ansible_connection=local        
 
 ####     Execute ansible playbook to install CIS benchmarks and remediate.       
