@@ -90,3 +90,12 @@
 ##      transfer the latest report from the VM to local environment to view and make comparison with the original report:
 ##      Run the copy command on your desktop
         scp user@ip or host:/home/user/ssg-cs9-ds-updated.html ./ 
+        
+### [9] CD to the root directory of the VM and it up but executing the following:
+        rm -f ssg*
+        
+###[10] Finally create a golden image from the modified VM. For the creation of the 
+        golden centos 9 stream image, refer to the microsoft publication referenced below:
+
+        https://learn.microsoft.com/en-us/azure/virtual-machines/capture-image-portal
+
