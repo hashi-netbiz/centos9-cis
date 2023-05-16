@@ -1,4 +1,4 @@
-# centos9-cis
+### centos9-cis
 
 Description
 -----------
@@ -6,7 +6,7 @@ This repo provides some scripts to be able to apply some CIS BENCHMARK to a Cent
 Section A below describes how openscap can be used to harden the centos 9 stream. Section B describes how a single 
 clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
 
-###SECTION A:
+### SECTION A:
 ### [1] Install the required packages:
         dnf -y install openscap-scanner scap-security-guide
 
@@ -113,7 +113,7 @@ clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
 
 
 
-###SECTION B
+### SECTION B
 
 Instructions
 ------------
