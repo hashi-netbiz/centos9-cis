@@ -34,7 +34,7 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
         scp user@ip or host:/home/user/ssg-cs9-ds-existing.html ./        
 
 ### [6] Generate remediation script from scaned result.
-        Remediation script will change various system settings, so you must take care if you run it, especially for production systems.
+###     Remediation script will change various system settings, so you must take care if you run it, especially for production systems.
        
 ### make sure the [Result ID] in the result output on [4]
         oscap info ssg-cs9-ds.xml | grep "Result ID" 
