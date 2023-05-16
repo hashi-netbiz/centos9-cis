@@ -66,22 +66,22 @@ clause in the CIS benchmark (specifically Clause 5.2) can be implemented to hard
 ###      CD into the VM root directory and EXECUTE the following command:
         cp /home/{CONTEXT-USER}/ssg-cs9-ds-remediation-playbook-new.yml ssg-cs9-ds-remediation-playbook-new.yml        
         
-        ### run remediation script
-        ### install ansible-core. Since sysctl module is not included, install this module via ansible-galaxy 
+###     run remediation script
+###     install ansible-core. Since sysctl module is not included, install this module via ansible-galaxy 
         dnf install ansible-core -y
         ansible-galaxy collection install ansible.posix
         
-        ### update the default anible hosts file located at /etc/ansible/hosts and append the following line:
+###     Update the default anible hosts file located at /etc/ansible/hosts and append the following line:
         localhost ansible_connection=local        
 
-        ### Execute ansible playbook to install CIS benchmarks and remediate.       
-        ### Replace 'sysctl:' with 'ansible.posix.sysctl:' in remediation playbook       
+###     Execute ansible playbook to install CIS benchmarks and remediate.       
+###     Replace 'sysctl:' with 'ansible.posix.sysctl:' in remediation playbook       
         sed 's/sysctl:/ansible.posix.sysctl:/g'  ssg-cs9-ds-remediation-playbook-new.yml 
         
-        ### Run playbook
+###     Run playbook
         ansible-playbook ./ssg-cs9-ds-remediation-playbook-new.yml
         
- ### [7] Re-run the HTML report and check the result:
+### [7] Re-run the HTML report and check the result:
         oscap xccdf eval \
         --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
         --results ssg-cs9-ds.xml \
