@@ -7,16 +7,16 @@ Section A below describes how openscap can be used to harden the centos 9 stream
 clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
 
 ### SECTION A:
-### [1] Install the required packages:
+# [1] Install the required packages:
         dnf -y install openscap-scanner scap-security-guide
 
-### [2] SCAP Security Guide is installed under the [/usr/share/xml/scap/ssg/content] directory: 
+# [2] SCAP Security Guide is installed under the [/usr/share/xml/scap/ssg/content] directory: 
         ll /usr/share/xml/scap/ssg/content/ 
 
-### [3] display description for each content: This displays all the security profiles implemented by oscap.
+# [3] display description for each content: This displays all the security profiles implemented by oscap.
         oscap info /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
         
-### [4] Scan CentOS System with [oscap] command. This based on server level 1 security checks only
+# [4] Scan CentOS System with [oscap] command. This based on server level 1 security checks only
         Scan result is generated as HTML report, verify it and try to apply recommended settings as much as possible:
         oscap xccdf eval \
         --profile xccdf_org.ssgproject.content_profile_cis_server_l1 \
@@ -25,15 +25,15 @@ clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
         --fetch-remote-resources \
         /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml 
 
-### [5] Check the html report and rename as ssg-cs9-ds-existing.html
-##      copy the html file to the context user home directory as below:
+# [5] Check the html report and rename as ssg-cs9-ds-existing.html
+#      copy the html file to the context user home directory as below:
         cp ssg-cs9-ds-existing.html /home/user/ssg-cs9-ds-existing.html
         
-##      transfer the newly created report from the VM to local environment to view:
-##      Run the copy command on your desktop
+#      transfer the newly created report from the VM to local environment to view:
+#      Run the copy command on your desktop
         scp user@ip or host:/home/user/ssg-cs9-ds-existing.html ./        
 
-### [6] generate remediation script from scaned result.
+# [6] generate remediation script from scaned result.
         Remediation script will change various system settings, so you must take care if you run it, especially for production systems.
        
         ## make sure the [Result ID] in the result output on [4]
@@ -52,20 +52,20 @@ clause in the CIS benchmark (Clause 5.2) can be implemented to harden the image.
         ## change the file ownership. Replace {CONTEXT-USER} with actual centos local user
         sudo chown {CONTEXT-USER} ssg-cs9-ds-remediation-playbook-existing.yml
         
-##      transfer the newly created playbook file from the VM to the local desktop environment to view:
-##      Run the copy command on your desktop 
+#      transfer the newly created playbook file from the VM to the local desktop environment to view:
+#      Run the copy command on your desktop 
         scp user@ip or host:/home/user/ssg-cs9-ds-remediation-playbook-existing.yml ./ 
         
-##      Open the downloaded ansible file in visual studio code and edit the file to comform to the recommendations on
-##      the openscap ticket (LINK TO TICKET).
+#      Open the downloaded ansible file in visual studio code and edit the file to comform to the recommendations on
+#      the openscap ticket (LINK TO TICKET).
 
-##      Rename the modified ansible file as ssg-cs9-ds-remediation-playbook-new.yml
+#      Rename the modified ansible file as ssg-cs9-ds-remediation-playbook-new.yml
 
-##      Upload playbook back to the VM. Run the following command on your desktop from the directory where the updated 
-##      playbook is located. Replace {CONTEXT-USER} with actual centos local user
+#      Upload playbook back to the VM. Run the following command on your desktop from the directory where the updated 
+#      playbook is located. Replace {CONTEXT-USER} with actual centos local user
         scp ssg-cs9-ds-remediation-playbook-new.yml {CONTEXT-USER}@ip or host:/home/{CONTEXT-USER}
         
-##      CD into the VM root directory and EXECUTE the following command
+#      CD into the VM root directory and EXECUTE the following command
         cp /home/{CONTEXT-USER}/ssg-cs9-ds-remediation-playbook-new.yml ssg-cs9-ds-remediation-playbook-new.yml        
         
         # run remediation script
