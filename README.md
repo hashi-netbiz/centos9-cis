@@ -7,7 +7,7 @@ Section A below describes how openscap and ansible can be used to harden the cen
 clause in the CIS benchmark (specifically Clause 5.2) can be implemented to harden the image.
 
 # SECTION A:
-### [1] Install the required packages:
+####   [1] Install the required packages:
         dnf -y install openscap-scanner scap-security-guide
 
 ### [2] SCAP Security Guide is installed under the [/usr/share/xml/scap/ssg/content] directory: 
