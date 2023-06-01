@@ -1,0 +1,23 @@
+1) navigate to the directory where the CrowdStrike agent RPM package and CID are located in windows and run the following command to upload the package to the VM in azure:
+	scp crowdstrike-agent.rpm azure-user@54.89.9.6:/home/azure-user
+2) navigate to the root directory and run the following commands:
+	cp /home/azure-user/crowdstrike-agent.rpm crowdstrike-agent.rpm         
+	sudo yum update
+	sudo yum install crowdstrike-agent.rpm
+3) Follow the installation prompts. If CID is not requested, run the follwing command:
+	sudo /opt/CrowdStrike/falconctl -s –cid=[CID]
+4)  After the installation is complete, start the CrowdStrike agent service by running the following command:
+	sudo systemctl start falcon-sensor
+5) Confirm that the CrowdStrike agent is running on the CentOS 9 Stream system by checking its status with the following command:
+	sudo systemctl status falcon-sensor
+	NB: You should see output indicating that the agent is active and running.
+6) In the CrowdStrike management console, locate the Policies section. This is where we can define and manage various policies that will be applied to the agents.
+7) Depending on our requirements, we can either create a new policy specifically for our CentOS 9 Stream deployment or modify an existing policy to suit our needs. If creating a new policy, give it an appropriate name that reflects its purpose.
+8)  Before creating the golden image, stop the agent service. You can do this by running the following command:
+	sudo systemctl stop falcon-sensor
+	sudo rm /var/lib/crowdstrike/.sensor_id
+	sudo systemctl start falcon-sensor
+9) Remove any unnecessary files, temporary data, or system logs from the virtual machine to reduce the image size and improve security. navigate to the directory where you transferred the CrowdStrike agent RPM package in the VM and run the following commands:
+	rm -f crowdstrike-agent.rpm
+
+	
